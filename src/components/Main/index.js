@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import MainContainer from "../common/MainContainer";
 import Loading from "../common/Loading";
+import IndicadorList from "./IndicadorList";
+import { Icon, Button } from "@ui-kitten/components";
 
-const Main = ({ navigation }) => {
+const Main = () => {
 
     const [isLoading, setIsLoading] = useState(true)
+    const [indicadores, setIndicadores] = useState([])
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false)
@@ -19,25 +22,26 @@ const Main = ({ navigation }) => {
         )
     return (
         <MainContainer>
-            <Text style={styles.headerTitle}>Menu principal</Text>
+            <Text style={styles.headerTitle}>INDICADORES FINANCIEROS</Text>
             <View style={styles.box}>
-                <Text>Aca va un texto introductorio</Text>
+                <Text>
+                    Selecciona un indicador para ver la lista de precios y sus variaciones, para ver detalle del indicador presiona el botón ( i )
+                </Text>
             </View>
+            <IndicadorList indicadores={indicadores} />
+
         </MainContainer>
     )
 }
 
 const styles = StyleSheet.create({
     headerTitle: {
-        fontSize: 18,
-        color: "#A66D03",
+        fontSize: 34,
+        color: "#4D79FF",
         fontWeight: "400"
     },
     box: {
-        backgroundColor: "#F2DFA7",
-        borderRadius: 10,
-        padding: 10,
-        marginVertical: 10,
+        marginBottom: 10,
     }
 })
 
