@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Icon, List, ListItem } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
@@ -17,20 +17,23 @@ const IndicadorList = ({ indicadores }) => {
             />
         )
     };
-    const renderItem = ({ item, index }) => (
-        <ListItem
-            onPress={() => navigateToPrices(item)}
-            style={styles.item}
-            title={`${item.title}`}
-            description={`${item.description} ${index + 1}`}
-            accessoryRight={renderItemAccessory(item)}
-        />
-    );
+    const renderItem = ({ item, index }) => {
+        if (item.nombre)
+            return (
+                <ListItem
+                    onPress={() => navigateToPrices(item)}
+                    style={styles.item}
+                    title={`${item.nombre}`}
+                    description={`${item.unidad_medida}`}
+                    accessoryRight={renderItemAccessory(item)}
+                />
+            )
+    };
     const navigateToPrices = (item) => {
+        console.log(item)
         navigation.navigate("Precios", { item: item })
     }
     const navigateToDetail = (item) => {
-        console.log(item)
         navigation.navigate("Detalle", { item: item })
     }
     return (

@@ -10,7 +10,7 @@ const useIndicadores = () => {
         setTimeout(() => {
             getIndicadores(res => {
                 setIsLoading(false)
-                setIndicadores(res)
+                setIndicadores(Object.values(res))
             })
         }, 2000);
     }, [])
