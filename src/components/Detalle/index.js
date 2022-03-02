@@ -2,16 +2,32 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import MainContainer from "../common/MainContainer";
 import { Card, Text } from "@ui-kitten/components";
-import PreciosChart from "../Precios/PreciosChart";
+import PreciosChart from "./PreciosChart";
+import { getPrecios } from "../../services/IndicadoresWS";
+import Loading from "../common/Loading"
 
 const Detalle = ({ route, navigation }) => {
 
     const { item } = route.params;
-    const { precios, setPrecios } = useState([])
+    const [precios, setPrecios] = useState({
+        dates: [], val: []
+    })
+    const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
-        console.log(item)
         if (item.codigo) {
             navigation.setOptions({ title: item.nombre })
+            getPrecios(item.codigo, res => {
+                if (res.serie) {
+                    let dates = res.serie.map(i => i.fecha.substring(0, 10)).slice(0, 10)
+                    let values = res.serie.map(i => i.valor).slice(0, 10)
+                    setPrecios({
+                        dates: dates,
+                        val: values
+                    })
+                }
+                setIsLoading(false)
+            })
         }
     }, [])
     const Header = (props) => (
@@ -20,6 +36,10 @@ const Detalle = ({ route, navigation }) => {
             <Text category='s1'>Valor</Text>
         </View>
     );
+    if (isLoading)
+        return (
+            <MainContainer><Loading /></MainContainer>
+        )
     return (
         <MainContainer>
             <Card style={styles.card} header={Header}>
