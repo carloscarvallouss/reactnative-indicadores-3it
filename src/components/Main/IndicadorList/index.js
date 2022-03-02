@@ -30,7 +30,6 @@ const IndicadorList = ({ indicadores }) => {
             )
     };
     const navigateToPrices = (item) => {
-        console.log(item)
         navigation.navigate("Precios", { item: item })
     }
     const navigateToDetail = (item) => {

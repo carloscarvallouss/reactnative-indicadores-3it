@@ -21,7 +21,7 @@ export default function App() {
       <ApplicationProvider {...eva} theme={{ ...eva.light }}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
-            <Stack.Screen name="Main" component={Main} options={{ title: '3IT' }} />
+            <Stack.Screen name="Main" component={Main} options={{ title: 'Inicio', headerShown: false }} />
             <Stack.Screen name="Detalle" component={Detalle} />
             <Stack.Screen name="Precios" component={Precios} />
           </Stack.Navigator>

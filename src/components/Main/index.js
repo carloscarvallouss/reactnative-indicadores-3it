@@ -24,6 +24,7 @@ const Main = () => {
 
 const styles = StyleSheet.create({
     headerTitle: {
+        marginTop: 100,
         fontSize: 34,
         color: "#4D79FF",
         fontWeight: "400"
