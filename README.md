@@ -1,0 +1,1 @@
+# reactnative-indicadores-3it
