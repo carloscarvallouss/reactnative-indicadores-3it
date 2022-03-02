@@ -22,15 +22,3 @@ export const getPrecios = (id, res) => {
             res(null)
         })
 }
-
-export const getDetalle = (item, res) => {
-    res([{
-        title: 'Dolar',
-        description: 'Pesos',
-    },
-    {
-        title: 'UF',
-        description: 'Pesos',
-    },
-    ])
-}

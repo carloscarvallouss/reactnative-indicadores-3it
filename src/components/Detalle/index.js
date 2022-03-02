@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import MainContainer from "../common/MainContainer";
 import { Card, Text } from "@ui-kitten/components";
 import PreciosChart from "./PreciosChart";
@@ -42,25 +42,30 @@ const Detalle = ({ route, navigation }) => {
         )
     return (
         <MainContainer>
-            <Card style={styles.card} header={Header}>
-                <View>
-                    <Text category={"c1"}>Nombre</Text>
-                    <Text style={styles.cardText}>{item.nombre}</Text>
-                </View>
-                <View>
-                    <Text category={"c1"}>Unidad de medida</Text>
-                    <Text style={styles.cardText}>{item.unidad_medida}</Text>
-                </View>
-                <View>
-                    <Text category={"c1"}>Fecha</Text>
-                    <Text style={styles.cardText}>{item.fecha.substring(0, 10)}</Text>
-                </View>
-            </Card >
-            <PreciosChart precios={precios} />
+            <ScrollView style={styles.container}>
+                <Card style={styles.card} header={Header}>
+                    <View>
+                        <Text category={"c1"}>Nombre</Text>
+                        <Text style={styles.cardText}>{item.nombre}</Text>
+                    </View>
+                    <View>
+                        <Text category={"c1"}>Unidad de medida</Text>
+                        <Text style={styles.cardText}>{item.unidad_medida}</Text>
+                    </View>
+                    <View>
+                        <Text category={"c1"}>Fecha</Text>
+                        <Text style={styles.cardText}>{item.fecha.substring(0, 10)}</Text>
+                    </View>
+                </Card >
+                <PreciosChart precios={precios} />
+            </ScrollView>
         </MainContainer >
     )
 }
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     title: {
         fontSize: 30,
         fontWeight: "700",
