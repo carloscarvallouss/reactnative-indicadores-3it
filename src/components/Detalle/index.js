@@ -19,12 +19,12 @@ const Detalle = ({ route, navigation }) => {
             navigation.setOptions({ title: item.nombre })
             getPrecios(item.codigo, res => {
                 if (res.serie) {
-                    let dates = res.serie.map(i => i.fecha.substring(0, 10)).slice(0, 10)
-                    let values = res.serie.map(i => i.valor).slice(0, 10)
-                    setPrecios({
-                        dates: dates,
-                        val: values
-                    })
+                    let filtered = res.serie.map(i => {
+                        i.fecha = i.fecha.substring(0, 10)
+                        return i
+                    }
+                    ).slice(0, 10)
+                    setPrecios(filtered)
                 }
                 setIsLoading(false)
             })

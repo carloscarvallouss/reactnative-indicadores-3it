@@ -1,39 +1,35 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { LineChart } from "react-native-chart-kit";
+import { VictoryLine, VictoryChart, VictoryLabel, VictoryAxis, VictoryTheme, VictoryScatter } from "victory-native";
 
 const PreciosChart = ({ precios }) => {
-
     return (
-        <LineChart
-            data={{
-                labels: precios.dates,
-                datasets: [{ data: precios.val }]
-            }}
-            width={Dimensions.get("window").width - 30} // from react-native
-            height={320}
-            yAxisLabel="$"
-            verticalLabelRotation={70}
-            yAxisInterval={1}
-            chartConfig={{
-                backgroundColor: "#e26a00",
-                backgroundGradientFrom: "#fb8c00",
-                backgroundGradientTo: "#ffa726",
-                decimalPlaces: 2,
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                propsForDots: {
-                    r: "6",
-                    strokeWidth: "2",
-                    stroke: "#ffa726"
-                },
-            }}
-            bezier
-            style={{
-                borderBottomRightRadius: 15,
-                marginVertical: 10
-            }}
-        />
+        <VictoryChart domainPadding={20} width={Dimensions.get("window").width} theme={VictoryTheme.material}>
+            <VictoryLine
+                style={{
+                    data: { stroke: "#4D79FF" },
+                    parent: { border: "1px solid #ccc" },
+                    labels: {
+                        fontSize: 15,
+                        fill: ({ datum }) => datum.x === 3 ? "#000000" : "#c43a31"
+                    }
+                }}
+                data={precios} x="fecha" y="valor"
+                labels={({ datum }) => datum.y}
+            />
+            <VictoryScatter
+                data={precios}
+                x="fecha" y="valor"
+                size={7}
+                style={{
+                    data: {
+                        fill: "#3D61CC"
+                    }
+                }}
+            />
+            <VictoryAxis dependentAxis />
+            <VictoryAxis tickLabelComponent={<VictoryLabel angle={30} />} />
+        </VictoryChart>
     )
 }
 
