@@ -4,7 +4,7 @@ import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
 const Loading = () => {
     return (
         <View style={styles.container}>
-            <ActivityIndicator size={"large"} color="#A66D03" />
+            <ActivityIndicator size={"small"} color="#3366FF" />
             <Text style={styles.text}>OBTENIENDO INFORMACIÓN</Text>
         </View>
     )
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     text: {
         padding: 10,
         fontWeight: "600",
-        color: "#A66D03"
+        color: "#3366FF"
     }
 })
 

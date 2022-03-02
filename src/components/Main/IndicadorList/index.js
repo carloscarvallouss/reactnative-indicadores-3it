@@ -3,50 +3,40 @@ import { Button, Icon, List, ListItem } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
-const data = [{
-    title: 'Dolar',
-    description: 'Pesos',
-},
-{
-    title: 'UF',
-    description: 'Pesos',
-},
-];
 
-const IndicadorList = (props) => {
+const IndicadorList = ({ indicadores }) => {
 
     const navigation = useNavigation();
 
-    const renderItemAccessory = (props) => {
-        console.log(props)
+    const renderItemAccessory = (item) => {
         return (
             <Button
-                onPress={() => navigateToDetail(props)}
+                onPress={() => navigateToDetail(item)}
                 appearance='ghost'
-                accessoryLeft={<Icon {...props} name='info-outline' />}
+                accessoryLeft={<Icon name='info-outline' />}
             />
         )
     };
-
     const renderItem = ({ item, index }) => (
         <ListItem
-            onPress={() => navigateToPrices()}
+            onPress={() => navigateToPrices(item)}
             style={styles.item}
             title={`${item.title}`}
             description={`${item.description} ${index + 1}`}
-            accessoryRight={renderItemAccessory}
+            accessoryRight={renderItemAccessory(item)}
         />
     );
     const navigateToPrices = (item) => {
         navigation.navigate("Precios", { item: item })
     }
     const navigateToDetail = (item) => {
+        console.log(item)
         navigation.navigate("Detalle", { item: item })
     }
     return (
         <List
             style={styles.container}
-            data={data}
+            data={indicadores}
             renderItem={renderItem}
         />
     )

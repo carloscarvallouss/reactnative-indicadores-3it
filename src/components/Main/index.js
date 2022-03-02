@@ -3,23 +3,10 @@ import { Text, StyleSheet, View } from "react-native";
 import MainContainer from "../common/MainContainer";
 import Loading from "../common/Loading";
 import IndicadorList from "./IndicadorList";
-import { Icon, Button } from "@ui-kitten/components";
+import useIndicadores from "../../hooks/useIndicadores";
 
 const Main = () => {
-
-    const [isLoading, setIsLoading] = useState(true)
-    const [indicadores, setIndicadores] = useState([])
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 2000);
-    }, [])
-    if (isLoading)
-        return (
-            <MainContainer>
-                <Loading />
-            </MainContainer>
-        )
+    const [isLoading, indicadores] = useIndicadores()
     return (
         <MainContainer>
             <Text style={styles.headerTitle}>INDICADORES FINANCIEROS</Text>
@@ -28,8 +15,9 @@ const Main = () => {
                     Selecciona un indicador para ver la lista de precios y sus variaciones, para ver detalle del indicador presiona el botón ( i )
                 </Text>
             </View>
-            <IndicadorList indicadores={indicadores} />
-
+            {
+                isLoading ? <Loading /> : <IndicadorList indicadores={indicadores} />
+            }
         </MainContainer>
     )
 }
